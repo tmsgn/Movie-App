@@ -1,13 +1,13 @@
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Player from '../../components/player';
+import { useLocalSearchParams } from 'expo-router';
 
 const MoviePlayer = () => {
-  // Assuming the movie ID is passed as a prop or through navigation
-  const movieId = 'some-movie-id';
+  const { id } = useLocalSearchParams();
   return (
     <View style={styles.container}>
-      <Player sourceId={movieId} />
+      <Player sourceId={id} />
     </View>
   );
 };

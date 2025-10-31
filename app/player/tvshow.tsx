@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { View, StyleSheet, Button, Text, TouchableOpacity, FlatList, ActivityIndicator } from 'react-native';
 import Player from '../../components/player';
 import Modal from 'react-native-modal';
+import { useLocalSearchParams } from 'expo-router';
 
 const API_ENDPOINT = 'https://api.example.com/tvshow/'; // Placeholder
 
-const TVShowPlayer = ({ showId }) => {
+const TVShowPlayer = () => {
+  const { showId } = useLocalSearchParams();
   const [seasons, setSeasons] = useState([]);
   const [selectedEpisode, setSelectedEpisode] = useState(null);
   const [isEpisodeModalVisible, setEpisodeModalVisible] = useState(false);
@@ -49,7 +51,9 @@ const TVShowPlayer = ({ showId }) => {
   };
 
   useEffect(() => {
-    fetchSeasons();
+    if (showId) {
+      fetchSeasons();
+    }
   }, [showId]);
 
   const toggleEpisodeModal = () => setEpisodeModalVisible(!isEpisodeModalVisible);
